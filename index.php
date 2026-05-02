@@ -1,11 +1,8 @@
 <?php
-// 1. IMPORTANTE: O caminho deve estar correto. 
-// Se o functions.php estiver na mesma pasta que este index.php, use assim:
 require_once 'includes/functions.php'; 
 
-verificarAcesso(); // Agora o PHP vai encontrar esta função porque carregou o arquivo acima
+verificarAcesso();
 
-// Manipulação do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar'])) {
     $nome = htmlspecialchars(trim($_POST['nome']));
     $valor = floatval($_POST['valor']);
@@ -20,11 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar'])) {
     }
 }
 
-// Inicializa o saldo
 $saldoTotal = calcularSaldo($_SESSION['transacoes'] ?? []);
-
-// Se você não tiver o arquivo 'menunavegacao.php', comente a linha abaixo com //
-// include 'menunavegacao.php'; 
 ?>
 
 <!DOCTYPE html>
