@@ -1,27 +1,21 @@
 <?php
 require_once 'includes/functions.php'; 
 
-// Redireciona se já estiver logado
 if (isset($_SESSION['logado']) && $_SESSION['logado'] === true) {
     header("Location: index.php");
     exit;
 }
 
 $erro = "";
-
-// Simulação de um banco de dados com usuário fixo
 $usuario_correto = "admin";
-// O hash abaixo é equivalente à senha "123456" gerado por password_hash()
 $senha_hash_bd = password_hash("123456", PASSWORD_DEFAULT); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'] ?? '';
     $senha = $_POST['senha'] ?? '';
 
-    // Validação usando password_verify
     if ($usuario === $usuario_correto && password_verify($senha, $senha_hash_bd)) {
         $_SESSION['logado'] = true;
-        // Inicializa o array de transações na sessão caso não exista
         if (!isset($_SESSION['transacoes'])) {
             $_SESSION['transacoes'] = [];
         }
