@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/functions.php'; 
-verificarAcesso(); // Proteção de rota
+verificarAcesso();
 
 $transacoes = $_SESSION['transacoes'];
 $totalDespesas = calcularTotalDespesas($transacoes);
@@ -36,7 +36,6 @@ require_once 'includes/menunavegacao.php';
                     </td>
                     <td>
                         <?php 
-                            // Lógica de bônus: Porcentagem do gasto frente ao total de despesas
                             if ($transacao['tipo'] === 'despesa') {
                                 $porcentagem = calcularRelevancia($transacao['valor'], $totalDespesas);
                                 echo number_format($porcentagem, 1, ',', '.') . "%";
